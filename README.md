@@ -60,8 +60,15 @@ Changes are tagged with semver (`v1`, `v1.1`, …). The major tag (`v1`) moves
 to the latest compatible release; breaking changes bump the major version.
 Don't reference `main` from a consumer workflow.
 
+## Development
+
+The cleanup commands live in `free-disk-space.sh`. `action.yml` only runs
+that script. Tests stub `sudo`, `df`, and `docker`, so `node --test` does
+not delete anything on the machine that runs them.
+
 ## Contributing
 
 Changes go through a PR, not direct pushes to `main`. This action runs with
 `sudo` in consuming repos, so deletions from the path list above need review
-scrutiny — never add a path outside the preinstalled toolchain set.
+scrutiny — never add a path outside the preinstalled toolchain set. Do not
+commit tokens, keys, or customer data; this repository is public.
