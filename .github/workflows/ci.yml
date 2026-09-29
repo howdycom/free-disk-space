@@ -1,0 +1,20 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate action metadata
+        run: >-
+          python3 -c "import yaml;
+          m = yaml.safe_load(open('action.yml'));
+          assert m['runs']['using'] == 'composite', m;
+          print('action.yml OK:', m['name'])"
